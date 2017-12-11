@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="style.css" />
+	<title></title>
+</head>
+<body>
+	{% for row in rows %}
+	<div class="task" id="div-{{row.id}}">
+	Билет №{{row.id}}
+	<ol class="task-ol" id="ol-{{row.id}}">
+		<li class="task-ol-t1" id="li-1-{{row.id}}">{{row.t1}} (2 бали)</li>
+		<li class="task-ol-t2" id="li-2-{{row.id}}">{{row.t2}} (4 бали)</li>
+		<li class="task-ol-t3" id="li-3-{{row.id}}">{{row.t3}} (Словесний опис: 4 бали, БС або ДД: 5 балів)</li>
+	</ol>
+	</div>
+	<hr class="break" />
+	{% endfor %}
+</body>
+</html>
