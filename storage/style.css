@@ -1,0 +1,67 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+hr {
+  margin: 0px;
+  padding: 0px;
+}
+div.task[id^=task] {
+  background-color: #F9F9F9;
+  border: 1px dotted #999;
+  font-family: Helvetica, Verdana, Arial, mono;
+  font-size: 12pt;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 10mm;
+  padding: 10mm 15mm;
+  height: 120mm;
+  overflow: hidden;
+  width: 190mm;
+}
+div.task[id^=task] > div {
+  flex: auto;
+}
+div.task[id^=task] > div.header {
+  flex-basis: 31mm;
+  overflow: hidden;
+}
+div.task[id^=task] > div.header > h2 {
+  font-size: 16pt;
+  text-align: center;
+}
+div.task[id^=task] > div.header > h3 {
+  font-size: 12pt;
+  float: right;
+  margin-top: 4mm;
+  text-align: right;
+  width: 90mm;
+}
+div.task[id^=task] > div.id > h1 {
+  font-size: 24pt;
+  font-weight: bolder;
+  margin-bottom: 10mm;
+  text-align: center;
+}
+div.task[id^=task] > div.questions > div.question > span.number {
+  font-size: 10pt;
+  font-weight: bolder;
+  vertical-align: baseline;
+}
+div.task[id^=task] > div.questions > div.question > span.text {
+  font-size: 12pt;
+  font-weight: lighter;
+  vertical-align: baseline;
+}
+div.task[id^=task] > div.footer > p {
+  font-size: 10pt;
+  text-align: right;
+}
+hr.break {
+  border-top: dotted 1px grey;
+}
