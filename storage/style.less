@@ -1,0 +1,80 @@
+html, body{
+	margin: 0px;
+	padding: 0px;
+}
+
+div.task[id^=task] {
+	background-color: #F9F9F9;
+	border: 1px;
+
+	font-family: Helvetica, Verdana, Arial, mono;
+	font-size: 12pt;
+
+	display: grid;
+
+	margin: 0px 10mm;
+	padding: 10mm 15mm;
+
+	height: 120mm;
+	overflow: hidden;
+	width: 190mm;
+
+	& > div {
+		border: 1px dotted red;
+	}
+}
+
+div.task > div.header {
+	margin: 0px;
+	padding: 0px;
+}
+div.task > div.footer {
+	margin: 0px;
+	padding: 0px;
+}
+
+div.task > div.header > h2 {
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+div.task > div.header > h3{
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+	width: 100mm;
+}
+
+div.task > div.id > h1 {
+	margin: 0px;
+	padding: 0px;
+}
+
+div.task > div.id {
+	font-size: 18pt;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+div.task > div.questions {
+	
+}
+
+div.task > div.questions > div.question {
+
+}
+
+div.task > div.questions > div.question > span.number {
+
+}
+
+div.task > div.questions > div.question > span.text {
+
+}
+
+hr.break {
+	border-top: dotted 1px grey;
+}

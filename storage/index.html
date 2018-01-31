@@ -6,16 +6,47 @@
 	<title></title>
 </head>
 <body>
-	{% for row in rows %}
-	<div class="task" id="div-{{row.id}}">
-	Билет №{{row.id}}
-	<ol class="task-ol" id="ol-{{row.id}}">
-		<li class="task-ol-t1" id="li-1-{{row.id}}">{{row.t1}} (2 бали)</li>
-		<li class="task-ol-t2" id="li-2-{{row.id}}">{{row.t2}} (4 бали)</li>
-		<li class="task-ol-t3" id="li-3-{{row.id}}">{{row.t3}} (Словесний опис: 4 бали, БС або ДД: 5 балів)</li>
-	</ol>
-	</div>
+	{% for task in tasks %}
+	{% if !loop.first %}
 	<hr class="break" />
+	{% endif %}
+	<div class="task" id="task-{{task.id}}">
+		<div class="header">
+			<h2>Національний технічний університет України "Київський політехнічний інститут імені Ігоря Сікорського"</h2>
+			<h3>Дисципліна: Веб-орієнтовна розробка програмного забезпечення</h3>
+		</div>
+		<div class="id"><h1>Екзаменаційний білет №{{task.id}}.</h1></div>
+		<div class="questions">
+			{% for question in task.questions %}
+			<div class="question" id="task-{{task.id}}-question-{{loop.index}}"> <span class="number">{{ loop.index }}.</span> <span class="text">{% autoescape true %}{{ question }}{% endautoescape %}</span> </div>
+			{% endfor %}
+		</div>
+		<div class="footer">
+			<p>
+				Затверджено на засіданні кафедри математичних методів системного аналізу<br />
+				Протокол № ___ від ____________ 20___ .<br />
+				Зав. кафедрою ____________ Тимощук О.Л.<br />
+        Екзаменатор   _____________Кухарєв С.О.</p>
+		</div>
+	</div>
+	{% endfor %}
+
+	<hr class="break" />
+	<hr class="break" />
+
+	{% for task in tasks %}
+	{% if !loop.first %}
+	<hr class="break" />
+	{% endif %}
+	<div class="task" id="_task-{{task.id}}">
+		<div class="title"></div>
+		<div class="id">Відповідь на білет №{{task.id}}</div>
+		<div class="answers">
+			{% for answer in task.answers %}
+			<div class="answer" id="task-{{task.id}}-answer-{{loop.index}}"> <span class="number">{{loop.index}}.</span> <span class="text">{% autoescape false %}{{answer}}{% endautoescape %}</span> </div>
+			{% endfor %}
+		</div>
+	</div>
 	{% endfor %}
 </body>
 </html>

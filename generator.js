@@ -2,48 +2,44 @@
 
 // http://node-swig.github.io/swig-templates/docs/
 
+
+Array.prototype.size = function(size, value) {
+	return this.slice(0, size).concat(Array.apply(null, Array(Math.max(size - this.length, 0))).map(el => value));
+}
+
 const swig = require('swig');
 const INPUT = require('./input');
-const TASKS = 75;
+const TASKS = 50;
 
-const input = [
-	[
-		[].concat(INPUT[0], INPUT[1]),
-		[].concat(INPUT[2]),
-		[].concat(INPUT[5])
-	],
-	[
-		[].concat(INPUT[0], INPUT[1]),
-		[].concat(INPUT[3]),
-		[].concat(INPUT[4])
-	]
-];
-//console.log(input);
+const input = {
+	html: INPUT.filter( el => String(el['type']).match(/html/i) ).map( el => ({ q: el['question'], a: el['answer'] }) ),
+	css: INPUT.filter( el => String(el['type']).match(/css/i) ).map( el => ({ q: el['question'], a: el['answer'] }) ),
+	js: INPUT.filter( el => String(el['type']).match(/js/i) ).map( el => ({ q: el['question'], a: el['answer'] }) )
+};
 
-function rand (min, max) {
+//console.log(Object.keys(input));console.log(input[Object.keys(input)[2]]);return;
+
+function randInt (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const test = Object.assign.apply({}, Array.apply(null, Array(TASKS))
+function rand(A, K) {
+	return K.map( el => A[el][randInt(0, A[el].length)] );
+}
+
+const tasks = Object.assign.apply({}, [].size(TASKS)
 	.map(function (value, index, ARRAY) {
 		const id = index + 1;
-		const idx = rand(0, input.length);
-		const idx0 = rand(0, input[idx][0].length);
-		const idx1 = rand(0, input[idx][1].length);
-		const idx2 = rand(0, input[idx][2].length);
+		const T = rand(input, ['html', 'html', 'css', 'css', 'js']);
 		return {
 			[id]: {
 				'id': id,
-				't1x': idx0,
-				't2x': idx1,
-				't3x': idx2,
-				't1': input[idx][0][idx0],
-				't2': input[idx][1][idx1],
-				't3': input[idx][2][idx2],
+				'questions': T.map(el => el.q),
+				'answers': T.map(el => el.a)
 			}
-		}
+		};
 	}));
-//console.log(test);
+//console.log(tasks);return;
 
 const tpl = new swig.Swig({
 	cache: false,
@@ -53,8 +49,8 @@ const tpl = new swig.Swig({
 	})
 });
 
-const html = tpl.renderFile('index.html', {rows: test});
-console.log(html);
+const html = tpl.renderFile('index.html', {tasks: tasks});
+//console.log(html);return;
 
 const fs = require('fs');
 fs.writeFileSync('storage/test.html', html, {encoding: 'utf8'});
